@@ -7,7 +7,11 @@ from ks_math import MathParser
 
 APP_ID = 'IceCalcBot'
 
-settingFileName = os.path.join(os.getenv('ice_setting'), APP_ID, 'setting.ini')
+setting_path = os.getenv('ice_setting')
+if setting_path is None:
+    raise Exception('System var ice_setting not found')
+
+settingFileName = os.path.join(setting_path, APP_ID, 'setting.ini')
 
 config = configparser.ConfigParser()
 config.read(settingFileName)
