@@ -18,7 +18,7 @@ ls = os.listdir('/etc/')
 msg = '{} {} {}'.format(os.getuid(), settingFileName, ls)
 
 if not os.path.exists(settingFileName):
-    raise Exception('Setting file {} not found'.format(settingFileName))
+    raise Exception('Setting file {} not found'.format(msg))
 
 config = configparser.ConfigParser()
 config.read(settingFileName)
