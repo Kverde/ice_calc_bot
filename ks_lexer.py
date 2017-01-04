@@ -5,6 +5,7 @@ class Lexer():
     NUMBERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
     TERM_OPERATOR = {'+', '-'}
     FACTOR_OPERATOR = {'*', '/'}
+    BRACKED = {'(', ')'}
 
     def __init__(self, text):
         self.parser = Parser(text)
@@ -17,7 +18,9 @@ class Lexer():
                 break
 
             ch = self.parser.current()
-            if ch in Lexer.TERM_OPERATOR or ch in Lexer.FACTOR_OPERATOR:
+            if ch in Lexer.TERM_OPERATOR \
+                    or ch in Lexer.FACTOR_OPERATOR \
+                    or ch in Lexer.BRACKED:
                 res = ch
                 self.parser.next()
             elif ch in Lexer.NUMBERS:

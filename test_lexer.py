@@ -22,6 +22,7 @@ class TestLexer(unittest.TestCase):
     def test_math(self):
         self.assertEqual([12, '+', 34, '-'], self.getList('12 + 34 -'))
         self.assertEqual([1.2, '/', '/', '*', 3], self.getList('1.2 / / * 3'))
+        self.assertEqual([1, '(', '(', ')'], self.getList('1 ( ( )'))
 
 
 

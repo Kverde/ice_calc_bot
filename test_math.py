@@ -15,3 +15,8 @@ class TestParser(unittest.TestCase):
         self.assertEqual(23, self.calc('23'))
         self.assertEqual(20.35, self.calc('12.12 + 0.23 + 3. + 5'))
         self.assertEqual(2.0, self.calc('4 / 2'))
+
+    def test_bracket(self):
+        self.assertEqual(8, self.calc('2 * (2 + 2)'))
+        self.assertEqual(33 * 5, self.calc(' (33 * (5))'))
+        self.assertEqual(10, self.calc('3 + (2 * 2) + ((3))'))

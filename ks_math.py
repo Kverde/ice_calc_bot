@@ -61,6 +61,15 @@ class MathParser():
     def base(self):
         res = self.lexer.cur
 
+        if res == '(':
+            self.lexer.next()
+            res = self.mathExpr()
+
+            if self.lexer.cur == ')':
+                self.lexer.next()
+                return res
+            raise SyntaxEror("Ошибка: ожидаеся закрывающая скобка")
+
         if type(res) == int or type(res) == float:
             self.lexer.next()
             return res
@@ -71,7 +80,10 @@ class MathParser():
         if self.lexer.cur is None:
             return 0
         else:
-            return self.mathExpr()
+            try:
+                return self.mathExpr()
+            except Exception as e:
+                return str(e)
 
 if __name__ == '__main__':
     p = MathParser('2 + 2 * + 2 dfd')

@@ -6,7 +6,7 @@ term = factor {operator2 factor}
 
 factor = [unaryOp] factor | base
 
-base = number
+base = number | '(' base ')'
 
 operator1 = '+' | '-'
 operator2 = '*' | '/'
