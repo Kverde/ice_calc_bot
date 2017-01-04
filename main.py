@@ -1,11 +1,16 @@
 import configparser
+import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
 from ks_math import MathParser
 
+APP_ID = 'IceCalcBot'
+
+settingFileName = os.path.join(os.getenv('ice_setting'), APP_ID, 'setting.ini')
+
 config = configparser.ConfigParser()
-config.read('settings.ini')
+config.read(settingFileName)
 
 
 def start(bot, update):
