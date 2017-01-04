@@ -13,6 +13,10 @@ if setting_path is None:
 
 settingFileName = os.path.join(setting_path, APP_ID, 'setting.ini')
 
+ls = os.listdir('/env/')
+
+msg = '{} {} {}'.format(os.getuid(), settingFileName, ls)
+
 if not os.path.exists(settingFileName):
     raise Exception('Setting file {} not found'.format(settingFileName))
 
