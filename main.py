@@ -13,7 +13,7 @@ if setting_path is None:
 
 settingFileName = os.path.join(setting_path, APP_ID, 'setting.ini')
 
-ls = os.listdir('/env/')
+ls = os.listdir('/etc/')
 
 msg = '{} {} {}'.format(os.getuid(), settingFileName, ls)
 
