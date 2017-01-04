@@ -13,6 +13,9 @@ if setting_path is None:
 
 settingFileName = os.path.join(setting_path, APP_ID, 'setting.ini')
 
+if not os.path.exists(settingFileName):
+    raise Exception('Setting file {} not found'.format(settingFileName))
+
 config = configparser.ConfigParser()
 config.read(settingFileName)
 
