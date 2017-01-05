@@ -29,13 +29,15 @@ def loadTelegramToken():
 telegramToken = loadTelegramToken()
 
 def start(bot, update):
-    print('start')
-    update.message.reply_text('Hello! Send me mathematical expression!')
+    update.message.reply_text('Привет! Отправьте мне математическое выражение и я верну результат. Для получения помощи введите "help" или "?".')
+    send_help(bot, update)
 
-def hello(bot, update):
-    print('hello')
-    update.message.reply_text(
-        'Hello {}'.format(update.message.from_user.first_name))
+def send_help(bot, update):
+    update.message.reply_text('Поддерживаемые операции +, -, *, /')
+    update.message.reply_text('Для группировки выражений доступны скобки')
+
+def help(bot, update):
+    send_help(bot, update)
 
 def text(bot, update):
     print('text ' + update.message.text)
@@ -48,7 +50,7 @@ def text(bot, update):
 updater = Updater(loadTelegramToken())
 
 updater.dispatcher.add_handler(CommandHandler('start', start))
-updater.dispatcher.add_handler(CommandHandler('hello', hello))
+updater.dispatcher.add_handler(CommandHandler('help', help))
 updater.dispatcher.add_handler(MessageHandler(Filters.text, text))
 
 updater.start_polling()
