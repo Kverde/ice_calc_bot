@@ -56,7 +56,13 @@ class MathParser():
             self.lexer.next()
             return operator(self.factor())
 
-        return self.base()
+        res = self.base()
+
+        while self.lexer.cur == '^':
+            self.lexer.next()
+            res = res ** self.factor()
+
+        return res
 
     def base(self):
         res = self.lexer.cur

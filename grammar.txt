@@ -4,7 +4,7 @@ mathExpr = term {operator1 term}
 
 term = factor {operator2 factor}
 
-factor = [unaryOp] factor | base
+factor = [unaryOp] factor | base {'^' factor}
 
 base = number | '(' mathExpr ')'
 

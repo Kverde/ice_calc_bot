@@ -40,9 +40,13 @@ def help(bot, update):
     send_help(bot, update)
 
 def text(bot, update):
-    print('text ' + update.message.text)
     try:
-        res = MathParser(update.message.text).parse()
+        text = update.message.text.strip()
+        if text == '?' or text == 'help':
+            send_help(bot, update)
+            return
+
+        res = MathParser(text).parse()
         update.message.reply_text(res)
     except Exception as e:
         print(e)

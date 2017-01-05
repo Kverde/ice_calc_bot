@@ -6,6 +6,7 @@ class Lexer():
     TERM_OPERATOR = {'+', '-'}
     FACTOR_OPERATOR = {'*', '/'}
     BRACKED = {'(', ')'}
+    OTHER_OPERATOR = {'^'}
 
     def __init__(self, text):
         self.parser = Parser(text)
@@ -20,7 +21,8 @@ class Lexer():
             ch = self.parser.current()
             if ch in Lexer.TERM_OPERATOR \
                     or ch in Lexer.FACTOR_OPERATOR \
-                    or ch in Lexer.BRACKED:
+                    or ch in Lexer.BRACKED \
+                    or ch in Lexer.OTHER_OPERATOR:
                 res = ch
                 self.parser.next()
             elif ch in Lexer.NUMBERS:
