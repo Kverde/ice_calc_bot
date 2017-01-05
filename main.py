@@ -33,7 +33,7 @@ def start(bot, update):
     send_help(bot, update)
 
 def send_help(bot, update):
-    update.message.reply_text('Поддерживаемые операции +, -, *, /')
+    update.message.reply_text('Поддерживаемые операции +, -, *, /, ^')
     update.message.reply_text('Для группировки выражений доступны скобки')
 
 def help(bot, update):
