@@ -1,6 +1,6 @@
 import unittest
 
-from ks_lexer import Lexer
+from source.ks_lexer import Lexer
 
 class TestLexer(unittest.TestCase):
     def getList(self, text):

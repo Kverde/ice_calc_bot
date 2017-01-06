@@ -3,7 +3,7 @@ import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-from ks_math import MathParser
+from source.ks_math import MathParser
 
 APP_ID = 'IceCalcBot'
 

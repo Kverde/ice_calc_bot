@@ -1,7 +1,6 @@
-
 import unittest
 
-from ks_memiter import MemIter
+from source.ks_memiter import MemIter
 
 class TestMemIter(unittest.TestCase):
     def test_current(self):

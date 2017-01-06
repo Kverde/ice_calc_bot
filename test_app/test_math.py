@@ -1,6 +1,6 @@
 import unittest
 
-from ks_math import MathParser
+from source.ks_math import MathParser
 
 class TestParser(unittest.TestCase):
 

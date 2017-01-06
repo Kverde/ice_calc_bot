@@ -1,7 +1,8 @@
 import operator
 
-from ks_lexer import Lexer
-from ks_memiter import MemIter
+from source.ks_memiter import MemIter
+
+from source.ks_lexer import Lexer
 
 class SyntaxEror(Exception):
     pass

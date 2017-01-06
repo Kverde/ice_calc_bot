@@ -1,6 +1,6 @@
 import unittest
 
-from ks_parser import Parser
+from source.ks_parser import Parser
 
 class TestParser(unittest.TestCase):
     TEST_TEXT = 'abc'
