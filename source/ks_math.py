@@ -1,4 +1,5 @@
 import operator
+import math
 
 from source.ks_memiter import MemIter
 
@@ -55,9 +56,13 @@ class MathParser():
         if self.lexer.cur in MathParser.UNARY_OPERATOR:
             operator = MathParser.UNARY_OPERATOR[self.lexer.cur]
             self.lexer.next()
-            return operator(self.factor())
+            res = operator(self.factor())
 
         res = self.base()
+
+        if self.lexer.cur == '!':
+            self.lexer.next()
+            res = math.factorial(res)
 
         while self.lexer.cur == '^':
             self.lexer.next()

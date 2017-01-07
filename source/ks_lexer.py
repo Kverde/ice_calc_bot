@@ -6,7 +6,7 @@ class Lexer():
     TERM_OPERATOR = {'+', '-'}
     FACTOR_OPERATOR = {'*', '/'}
     BRACKED = {'(', ')'}
-    OTHER_OPERATOR = {'^'}
+    OTHER_OPERATOR = {'^', '!'}
 
     def __init__(self, text):
         self.parser = Parser(text)

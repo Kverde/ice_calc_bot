@@ -1,4 +1,5 @@
 import unittest
+import math
 
 from source.ks_math import MathParser
 
@@ -25,3 +26,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(1024, self.calc('2 ^ 10'))
         self.assertEqual(5 ** 5, self.calc('5 ^ + (2 + 3)'))
         self.assertEqual(0.25, self.calc('2 ^ - 2'))
+
+    def test_factorial(self):
+        self.assertEqual(1 * 2 * 3 * 4 * 5, self.calc('5!'))
+        self.assertEqual(math.factorial(10), self.calc('(5 + 5)!'))
