@@ -24,6 +24,10 @@ class TestLexer(unittest.TestCase):
         self.assertEqual([1.2, '/', '/', '*', 3], self.getList('1.2 / / * 3'))
         self.assertEqual([1, '(', '(', ')'], self.getList('1 ( ( )'))
 
+    def test_ident(self):
+        self.assertEqual(['asd'], self.getList('asd'))
+        self.assertEqual(['кцо', 'фы'], self.getList('кцо фы'))
+        self.assertEqual([1.2, '+', 'pi', '-', 'z35'], self.getList('1.2 + pi - z35'))
 
 
 

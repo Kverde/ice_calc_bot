@@ -8,6 +8,11 @@ from source.ks_lexer import Lexer
 class SyntaxEror(Exception):
     pass
 
+
+math_const = {
+    'pi': 3.14
+}
+
 class MathParser():
     OPERATOR1 = {
         '+': operator.add,
@@ -57,8 +62,8 @@ class MathParser():
             operator = MathParser.UNARY_OPERATOR[self.lexer.cur]
             self.lexer.next()
             res = operator(self.factor())
-
-        res = self.base()
+        else:
+            res = self.base()
 
         if self.lexer.cur == '!':
             self.lexer.next()
@@ -86,7 +91,15 @@ class MathParser():
             self.lexer.next()
             return res
 
-        raise SyntaxEror('Ошибка: неизвестный иднтификатор "{}"'.format(res))
+        if type(res) == str:
+            if res in math_const:
+                self.lexer.next()
+                res = math_const[res]
+                return res
+            else:
+                raise SyntaxEror('Ошибка: неизвестный иднтификатор "{}"'.format(res))
+
+        raise SyntaxEror('Ошибка: неизвестная лексема "{}"'.format(res))
 
     def parse(self):
         if self.lexer.cur is None:

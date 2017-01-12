@@ -6,12 +6,13 @@ term = factor {operator2 factor}
 
 factor = [unaryOp] factor [unaryOp2] | base {'^' factor}
 
-base = number | '(' mathExpr ')'
+base = number | '(' mathExpr ')' | const
 
 operator1 = '+' | '-'
 operator2 = '*' | '/'
 unaryOp = '+' | '-'
 unaryOp2 = '!'
 
+const = a..Z
 number = digit {digit} [. {digit}]
 digit = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '0' 

@@ -8,6 +8,7 @@ class Lexer():
     BRACKED = {'(', ')'}
     OTHER_OPERATOR = {'^', '!'}
 
+
     def __init__(self, text):
         self.parser = Parser(text)
 
@@ -27,6 +28,8 @@ class Lexer():
                 self.parser.next()
             elif ch in Lexer.NUMBERS:
                 res = self.parse_number()
+            elif ch.isalpha():
+                res = self.parse_ident()
             else:
                 return 'Неизвесный символ ord(' + ch + ') = ' + str(ord(ch))
 
@@ -47,6 +50,14 @@ class Lexer():
             res = int(self.parser.copy(start_index))
 
         return res
+
+    def parse_ident(self):
+        start_index = self.parser.index
+        self.parser.next()
+
+        self.parser.skipWhile(lambda ch : ch.isalnum())
+
+        return self.parser.copy(start_index)
 
 
 if __name__ == '__main__':
