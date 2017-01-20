@@ -26,6 +26,10 @@ def cm_help(bot, update):
     domain.on_help(bot, update)
     botanTrack(update.message, 'help')
 
+def cm_about(bot, update):
+    domain.on_about(bot, update)
+    botanTrack(update.message, 'about')
+
 def callb_text(bot, update):
     try:
         log_msg = domain.on_text(bot, update)
@@ -37,6 +41,7 @@ updater = Updater(setting.telegram_token)
 
 updater.dispatcher.add_handler(CommandHandler('start', cm_start))
 updater.dispatcher.add_handler(CommandHandler('help', cm_help))
+updater.dispatcher.add_handler(CommandHandler('about', cm_about))
 updater.dispatcher.add_handler(MessageHandler(Filters.text, callb_text))
 
 updater.start_polling()

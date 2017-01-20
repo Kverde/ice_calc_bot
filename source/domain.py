@@ -11,6 +11,9 @@ class Domain():
         update.message.reply_text('Поддерживаемые операции +, -, *, /, ^')
         update.message.reply_text('Для группировки выражений доступны скобки')
 
+    def on_about(self, bot, update):
+        update.message.reply_text(r'Для связи с разработчиком используйте Telegram @KonstantinShpilko, сайт http://way23.ru')
+
     def on_text(self, bot, update):
         text = update.message.text.strip()
         if text == '?' or text == 'help':
