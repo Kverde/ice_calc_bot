@@ -7,6 +7,7 @@ class Lexer():
     FACTOR_OPERATOR = {'*', '/'}
     BRACKED = {'(', ')'}
     OTHER_OPERATOR = {'^', '!'}
+    DECIMAL_SEPARATOR = {'.', ','}
 
 
     def __init__(self, text):
@@ -40,14 +41,17 @@ class Lexer():
 
         self.parser.skipWhile(lambda ch : ch in Lexer.NUMBERS)
 
-        if self.parser.current() == '.':
+        if self.parser.current() in Lexer.DECIMAL_SEPARATOR:
             self.parser.next()
 
             self.parser.skipWhile(lambda ch: ch in Lexer.NUMBERS)
 
-            res = float(self.parser.copy(start_index))
+            res = self.parser.copy(start_index).replace(',', '.')
+            res = float(res)
         else:
             res = int(self.parser.copy(start_index))
+
+
 
         return res
 

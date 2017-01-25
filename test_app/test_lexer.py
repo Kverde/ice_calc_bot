@@ -11,8 +11,10 @@ class TestLexer(unittest.TestCase):
         self.assertEqual([1], self.getList('1'))
         self.assertEqual([0], self.getList(' 0 '))
         self.assertEqual([12.0], self.getList('12.'))
+        self.assertEqual([12.0], self.getList('12,'))
 
         self.assertEqual([55.55, 87857], self.getList('55.55 87857'))
+        self.assertEqual([1234567.985645], self.getList('1234567,985645'))
 
     def test_empty(self):
         self.assertEqual([], self.getList(''))
