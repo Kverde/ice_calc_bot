@@ -1,5 +1,15 @@
 from source.ks_math import MathParser
 
+help_text = ''' Поддерживаемые операции +, -, *, /
+^ - возведение в степень (2 ^ 10)
+! - факториал (5!)
+Константы "e" и "pi"  (pi * 2)
+Функции:
+sqrt - квадратный корень
+abs - модуль числа
+sin, cos, tan
+'''
+
 class Domain():
     def on_start(self, bot, update):
         update.message.reply_text(
@@ -8,7 +18,7 @@ class Domain():
         self.on_help(bot, update)
 
     def on_help(self, bot, update):
-        update.message.reply_text('Поддерживаемые операции +, -, *, /, ^')
+        update.message.reply_text('')
         update.message.reply_text('Для группировки выражений доступны скобки')
 
     def on_about(self, bot, update):

@@ -9,12 +9,8 @@ class SyntaxEror(Exception):
     pass
 
 
-math_const = {
-    'pi': math.pi,
-    'e': math.e
-}
-
 class MathParser():
+
     OPERATOR1 = {
         '+': operator.add,
         '-': operator.sub
@@ -28,6 +24,19 @@ class MathParser():
     UNARY_OPERATOR = {
         '+': operator.pos,
         '-': operator.neg
+    }
+
+    MATH_CONST = {
+        'pi': math.pi,
+        'e': math.e
+    }
+
+    MATH_FUNCTION = {
+        'sin': math.sin,
+        'cos': math.cos,
+        'sqrt': math.sqrt,
+        'tan': math.tan,
+        'abs': math.fabs
     }
 
     def __init__(self, text):
@@ -93,10 +102,25 @@ class MathParser():
             return res
 
         if type(res) == str:
-            if res in math_const:
+            if res in self.MATH_CONST:
                 self.lexer.next()
-                res = math_const[res]
+                res = self.MATH_CONST[res]
                 return res
+            elif res in self.MATH_FUNCTION:
+                self.lexer.next()
+
+                if not self.lexer.cur == '(':
+                    raise SyntaxEror('Ошибка: ожидается символ "(", обнаружен "{}"'.format(self.lexer.cur))
+                self.lexer.next()
+
+                arg = self.mathExpr()
+
+                if not self.lexer.cur == ')':
+                    raise SyntaxEror('Ошибка: ожидается символ "(", обнаружен "{}"'.format(self.lexer.cur))
+                self.lexer.next()
+
+                func = self.MATH_FUNCTION[res]
+                return func(arg)
             else:
                 raise SyntaxEror('Ошибка: неизвестный иднтификатор "{}"'.format(res))
 

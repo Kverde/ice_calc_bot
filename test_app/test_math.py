@@ -40,3 +40,9 @@ class TestParser(unittest.TestCase):
         self.assertEqual('Ошибка: неизвестный иднтификатор "ss"', self.calc('ss 22 z'))
         self.assertEqual('Ошибка: неизвестный иднтификатор "z"', self.calc('22 z'))
 
+    def test_func(self):
+        self.assertEqual(math.sin(90), self.calc('sin(90)'))
+        self.assertEqual(math.cos(90), self.calc('cos(90)'))
+        self.assertEqual(math.sqrt(64) + 33 + math.pi, self.calc('sqrt(64) + 33 + pi'))
+        self.assertEqual(math.tan(90), self.calc('tan(90)'))
+        self.assertEqual(math.fabs(90), self.calc('abs(90)'))
