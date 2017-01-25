@@ -36,3 +36,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(math.e, self.calc('e'))
         self.assertEqual(math.pi * 2, self.calc('+ pi * 2'))
 
+    def test_error(self):
+        self.assertEqual('Ошибка: неизвестный иднтификатор "ss"', self.calc('ss 22 z'))
+        self.assertEqual('Ошибка: неизвестный иднтификатор "z"', self.calc('22 z'))
+

@@ -107,7 +107,13 @@ class MathParser():
             return 0
         else:
             try:
-                return self.mathExpr()
+                res = self.mathExpr()
+
+                if not self.lexer.cur == None:
+                    raise SyntaxEror('Ошибка: неизвестный иднтификатор "{}"'.format(self.lexer.cur))
+
+                return res
+
             except Exception as e:
                 return str(e)
 
