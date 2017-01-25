@@ -32,5 +32,7 @@ class TestParser(unittest.TestCase):
         self.assertEqual(math.factorial(10), self.calc('(5 + 5)!'))
 
     def test_consts(self):
-        self.assertEqual(3.14, self.calc('pi'))
-        self.assertEqual(6.28, self.calc('+ pi * 2'))
+        self.assertEqual(math.pi, self.calc('pi'))
+        self.assertEqual(math.e, self.calc('e'))
+        self.assertEqual(math.pi * 2, self.calc('+ pi * 2'))
+

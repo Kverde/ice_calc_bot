@@ -10,7 +10,8 @@ class SyntaxEror(Exception):
 
 
 math_const = {
-    'pi': 3.14
+    'pi': math.pi,
+    'e': math.e
 }
 
 class MathParser():
