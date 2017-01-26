@@ -11,6 +11,11 @@ abs - модуль числа
 sin, cos, tan
 '''
 
+about_text = '''Пожалуйста, оцените этого бота https://telegram.me/storebot?start=IceCalcBot
+
+Для связи с разработчиком используйте Telegram @KonstantinShpilko, сайт http://way23.ru
+'''
+
 class Domain():
     def on_start(self, bot, update):
         update.message.reply_text(
@@ -22,7 +27,7 @@ class Domain():
         update.message.reply_text(help_text)
 
     def on_about(self, bot, update):
-        update.message.reply_text(r'Для связи с разработчиком используйте Telegram @KonstantinShpilko, сайт http://way23.ru')
+        update.message.reply_text(about_text)
 
     def on_text(self, bot, update):
         text = update.message.text.strip()
