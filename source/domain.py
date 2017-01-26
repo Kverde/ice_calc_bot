@@ -3,6 +3,7 @@ from source.ks_math import MathParser
 help_text = ''' Поддерживаемые операции +, -, *, /
 ^ - возведение в степень (2 ^ 10)
 ! - факториал (5!)
+Скобки ( ) для управления порядком вычислений
 Константы "e" и "pi"  (pi * 2)
 Функции:
 sqrt - квадратный корень
@@ -18,8 +19,7 @@ class Domain():
         self.on_help(bot, update)
 
     def on_help(self, bot, update):
-        update.message.reply_text('')
-        update.message.reply_text('Для группировки выражений доступны скобки')
+        update.message.reply_text(help_text)
 
     def on_about(self, bot, update):
         update.message.reply_text(r'Для связи с разработчиком используйте Telegram @KonstantinShpilko, сайт http://way23.ru')
