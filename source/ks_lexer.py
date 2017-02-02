@@ -9,6 +9,8 @@ class Lexer():
     OTHER_OPERATOR = {'^', '!'}
     DECIMAL_SEPARATOR = {'.', ','}
     HEX_FLAG = {'x', 'X'}
+    OCT_FLAG = {'o', 'O'}
+    BIN_FLAG = {'b', 'B'}
     HEX_DIGIT = ['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']
 
 
@@ -59,6 +61,15 @@ class Lexer():
 
         return res
 
+    def parse_bin(self):
+        start_index = self.parser.index
+
+        self.parser.skipWhile(lambda ch: ch in Lexer.NUMBERS)
+
+        str = self.parser.copy(start_index)
+        res = int(str, 2)
+
+        return res
 
     def parse_number(self):
         start_index = self.parser.index
@@ -69,8 +80,12 @@ class Lexer():
             if self.parser.current() in Lexer.HEX_FLAG:
                 self.parser.next()
                 return self.parse_hex()
-            elif self.parser.current() in Lexer.NUMBERS:
+            elif self.parser.current() in Lexer.OCT_FLAG:
+                self.parser.next()
                 return self.parse_oct()
+            elif self.parser.current() in Lexer.BIN_FLAG:
+                self.parser.next()
+                return self.parse_bin()
 
         self.parser.skipWhile(lambda ch : ch in Lexer.NUMBERS)
 

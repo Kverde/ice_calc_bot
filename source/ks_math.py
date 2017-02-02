@@ -10,6 +10,7 @@ class SyntaxEror(Exception):
 
 
 class MathParser():
+    ERROR_PREFIX = 'Error: '
 
     OPERATOR1 = {
         '+': operator.add,
@@ -95,7 +96,7 @@ class MathParser():
             if self.lexer.cur == ')':
                 self.lexer.next()
                 return res
-            raise SyntaxEror("Ошибка: ожидаеся закрывающая скобка")
+            raise SyntaxEror("ожидаеся закрывающая скобка")
 
         if type(res) == int or type(res) == float:
             self.lexer.next()
@@ -110,23 +111,23 @@ class MathParser():
                 self.lexer.next()
 
                 if not self.lexer.cur == '(':
-                    raise SyntaxEror('Ошибка: ожидается символ "(", обнаружен "{}"'.format(self.lexer.cur))
+                    raise SyntaxEror('ожидается символ "(", обнаружен "{}"'.format(self.lexer.cur))
                 self.lexer.next()
 
                 arg = self.mathExpr()
 
                 if not self.lexer.cur == ')':
-                    raise SyntaxEror('Ошибка: ожидается символ "(", обнаружен "{}"'.format(self.lexer.cur))
+                    raise SyntaxEror('ожидается символ "(", обнаружен "{}"'.format(self.lexer.cur))
                 self.lexer.next()
 
                 func = self.MATH_FUNCTION[res]
                 return func(arg)
             else:
-                raise SyntaxEror('Ошибка: неизвестный иднтификатор "{}"'.format(res))
+                raise SyntaxEror('неизвестный иднтификатор "{}"'.format(res))
 
-        raise SyntaxEror('Ошибка: неизвестная лексема "{}"'.format(res))
+        raise SyntaxEror('неизвестная лексема "{}"'.format(res))
 
-    def parse(self):
+    def parse(self, base):
         if self.lexer.cur is None:
             return 0
         else:
@@ -134,12 +135,22 @@ class MathParser():
                 res = self.mathExpr()
 
                 if not self.lexer.cur == None:
-                    raise SyntaxEror('Ошибка: неизвестный иднтификатор "{}"'.format(self.lexer.cur))
+                    raise SyntaxEror('неизвестный иднтификатор "{}"'.format(self.lexer.cur))
 
-                return res
+                if base == 10:
+                    return res
+                elif base == 2:
+                    return bin(res)
+                elif base == 8:
+                    return oct(res)
+                elif base == 16:
+                    res = hex(res)
+                    return res[0:2] + res[2:].upper()
+                else:
+                    raise SyntaxEror('Система счисления с основанием {} не поддерживается'.format(base))
 
             except Exception as e:
-                return str(e)
+                return str(MathParser.ERROR_PREFIX + str(e))
 
 if __name__ == '__main__':
     p = MathParser('2 + 2 * + 2 dfd')

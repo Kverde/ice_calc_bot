@@ -10,8 +10,16 @@ sqrt - квадратный корень
 abs - модуль числа
 sin, cos, tan
 
-0343 - числа в восьмеричной системе
+0b6F - числа в двоичной системе
+0o343 - числа в восьмеричной системе
 0x6F - числа в шестнадцатеричной системе
+
+Доступны команды для вывода результата в нужной системе счисления
+/bin - в двоичной
+/oct - в восьмеричной
+/hex в шестнадцатеричной
+
+Пример: /bin 5 + 6
 '''
 
 about_text = '''Пожалуйста, оцените этого бота https://telegram.me/storebot?start=IceCalcBot
@@ -32,12 +40,17 @@ class Domain():
     def on_about(self, bot, update):
         update.message.reply_text(about_text)
 
-    def on_text(self, bot, update):
+    def on_math(self, bot, update, command, base):
+        text = update.message.text[len(command):].strip()
+        res = MathParser(text).parse(base)
+        update.message.reply_text(res)
+
+    def on_text(self, bot, update, base):
         text = update.message.text.strip()
         if text == '?' or text == 'help':
             self.on_help(bot, update)
             return 'text_help'
 
-        res = MathParser(text).parse()
+        res = MathParser(text).parse(base)
         update.message.reply_text(res)
         return 'math'

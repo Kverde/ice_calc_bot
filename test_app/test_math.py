@@ -5,8 +5,8 @@ from source.ks_math import MathParser
 
 class TestParser(unittest.TestCase):
 
-    def calc(self, text):
-        return  MathParser(text).parse()
+    def calc(self, text, base = 10):
+        return  MathParser(text).parse(base)
 
     def test_empty(self):
         self.assertEqual(0, self.calc(''))
@@ -37,8 +37,8 @@ class TestParser(unittest.TestCase):
         self.assertEqual(math.pi * 2, self.calc('+ pi * 2'))
 
     def test_error(self):
-        self.assertEqual('Ошибка: неизвестный иднтификатор "ss"', self.calc('ss 22 z'))
-        self.assertEqual('Ошибка: неизвестный иднтификатор "z"', self.calc('22 z'))
+        self.assertEqual('Error: неизвестный иднтификатор "ss"', self.calc('ss 22 z'))
+        self.assertEqual('Error: неизвестный иднтификатор "z"', self.calc('22 z'))
 
     def test_func(self):
         self.assertEqual(math.sin(90), self.calc('sin(90)'))
@@ -46,3 +46,8 @@ class TestParser(unittest.TestCase):
         self.assertEqual(math.sqrt(64) + 33 + math.pi, self.calc('sqrt(64) + 33 + pi'))
         self.assertEqual(math.tan(90), self.calc('tan(90)'))
         self.assertEqual(math.fabs(90), self.calc('abs(90)'))
+
+    def test_base(self):
+        self.assertEqual('0b11', self.calc('3', 2))
+        self.assertEqual('0o3', self.calc('3', 8))
+        self.assertEqual('0xA', self.calc('10', 16))
