@@ -7,11 +7,20 @@ class TestLexer(unittest.TestCase):
         return list(Lexer(text))
 
     def test_number(self):
-        self.assertEqual([12], self.getList('12'))
+        self.assertEqual([13], self.getList('13'))
         self.assertEqual([1], self.getList('1'))
         self.assertEqual([0], self.getList(' 0 '))
-        self.assertEqual([12.0], self.getList('12.'))
-        self.assertEqual([12.0], self.getList('12,'))
+        self.assertEqual([14.0], self.getList('14.'))
+        self.assertEqual([15.0], self.getList('15,'))
+
+
+        self.assertEqual([8], self.getList('010'))
+        self.assertEqual([10], self.getList('012'))
+
+        self.assertEqual([5], self.getList('0x5'))
+        self.assertEqual([16], self.getList('0X10'))
+
+
 
         self.assertEqual([55.55, 87857], self.getList('55.55 87857'))
         self.assertEqual([1234567.985645], self.getList('1234567,985645'))

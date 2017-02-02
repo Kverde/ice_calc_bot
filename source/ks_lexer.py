@@ -8,6 +8,8 @@ class Lexer():
     BRACKED = {'(', ')'}
     OTHER_OPERATOR = {'^', '!'}
     DECIMAL_SEPARATOR = {'.', ','}
+    HEX_FLAG = {'x', 'X'}
+    HEX_DIGIT = ['a', 'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F']
 
 
     def __init__(self, text):
@@ -36,8 +38,39 @@ class Lexer():
 
             yield res
 
+    def parse_hex(self):
+        start_index = self.parser.index
+
+        self.parser.skipWhile(lambda ch: ch in Lexer.NUMBERS or ch in Lexer.HEX_DIGIT)
+
+        str = self.parser.copy(start_index)
+        res = int(str, 16)
+
+        return res
+
+
+    def parse_oct(self):
+        start_index = self.parser.index
+
+        self.parser.skipWhile(lambda ch: ch in Lexer.NUMBERS)
+
+        str = self.parser.copy(start_index)
+        res = int(str, 8)
+
+        return res
+
+
     def parse_number(self):
         start_index = self.parser.index
+
+        if self.parser.current() == '0':
+            self.parser.next()
+
+            if self.parser.current() in Lexer.HEX_FLAG:
+                self.parser.next()
+                return self.parse_hex()
+            elif self.parser.current() in Lexer.NUMBERS:
+                return self.parse_oct()
 
         self.parser.skipWhile(lambda ch : ch in Lexer.NUMBERS)
 
@@ -49,9 +82,8 @@ class Lexer():
             res = self.parser.copy(start_index).replace(',', '.')
             res = float(res)
         else:
-            res = int(self.parser.copy(start_index))
-
-
+            str = self.parser.copy(start_index)
+            res = int(str)
 
         return res
 
