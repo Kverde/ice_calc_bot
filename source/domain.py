@@ -42,7 +42,7 @@ class Domain():
 
     def on_math(self, bot, update, command, base):
         text = update.message.text[len(command):].strip()
-        res = MathParser(text).parse(base)
+        res = MathParser(text).solve(base)
         update.message.reply_text(res)
 
     def on_text(self, bot, update, base):
@@ -51,6 +51,6 @@ class Domain():
             self.on_help(bot, update)
             return 'text_help'
 
-        res = MathParser(text).parse(base)
+        res = MathParser(text).solve(base)
         update.message.reply_text(res)
         return 'math'
