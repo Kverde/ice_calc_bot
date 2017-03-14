@@ -41,5 +41,17 @@ class TestLexer(unittest.TestCase):
         self.assertEqual(['кцо', 'фы'], self.getList('кцо фы'))
         self.assertEqual([1.2, '+', 'pi', '-', 'z35'], self.getList('1.2 + pi - z35'))
 
+        self.assertEqual(['dsa', 'pi', 'div'], self.getList('DSa pi DIV'))
+
+
+    def test_operators(self):
+        self.assertEqual([2, '**', 3], self.getList('2**3'))
+        self.assertEqual([2, '//', '/', 3], self.getList('2///3'))
+        self.assertEqual([2, 'div', 3], self.getList('2 div 3'))
+        self.assertEqual([2, 'mod', 3], self.getList('2 mod 3'))
+
+
+
+
 
 

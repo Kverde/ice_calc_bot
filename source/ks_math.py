@@ -19,7 +19,10 @@ class MathParser():
 
     OPERATOR2 = {
         '*': operator.mul,
-        '/': operator.truediv
+        '/': operator.truediv,
+        '//': operator.floordiv,
+        'div': operator.floordiv,
+        'mod': operator.mod
     }
 
     UNARY_OPERATOR = {
@@ -80,7 +83,7 @@ class MathParser():
             self.lexer.next()
             res = math.factorial(res)
 
-        while self.lexer.cur == '^':
+        while self.lexer.cur in ('^', '**'):
             self.lexer.next()
             res = res ** self.factor()
 

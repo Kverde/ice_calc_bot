@@ -31,12 +31,20 @@ class Lexer():
                     or ch in Lexer.OTHER_OPERATOR:
                 res = ch
                 self.parser.next()
+
+                if res in ('*', '/') and self.parser.current() == res:
+                    res += res
+                    self.parser.next()
+
             elif ch in Lexer.NUMBERS:
                 res = self.parse_number()
             elif ch.isalpha():
                 res = self.parse_ident()
             else:
                 return 'Неизвесный символ ord(' + ch + ') = ' + str(ord(ch))
+
+            if type(res) == str:
+                res = res.lower()
 
             yield res
 

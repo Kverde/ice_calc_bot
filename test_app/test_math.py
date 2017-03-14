@@ -15,7 +15,12 @@ class TestParser(unittest.TestCase):
         self.assertEqual(6, self.calc('2 + 2 * 2'))
         self.assertEqual(23, self.calc('23'))
         self.assertEqual(20.35, self.calc('12.12 + 0.23 + 3. + 5'))
+
         self.assertEqual('2', str(self.calc('4 / 2')))
+
+        self.assertEqual(2, self.calc('5 // 2'))
+        self.assertEqual(2, self.calc('5 div 2'))
+        self.assertEqual(1, self.calc('5 mod 2'))
 
 
     def test_bracket(self):
@@ -27,6 +32,9 @@ class TestParser(unittest.TestCase):
         self.assertEqual(1024, self.calc('2 ^ 10'))
         self.assertEqual(5 ** 5, self.calc('5 ^ + (2 + 3)'))
         self.assertEqual(0.25, self.calc('2 ^ - 2'))
+
+        self.assertEqual(0.25, self.calc('2 ** - 2'))
+        self.assertEqual(5 ** 5, self.calc('5 ** + (2 + 3)'))
 
     def test_factorial(self):
         self.assertEqual(1 * 2 * 3 * 4 * 5, self.calc('5!'))
