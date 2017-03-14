@@ -22,6 +22,12 @@ class TestParser(unittest.TestCase):
         self.assertEqual(2, self.calc('5 div 2'))
         self.assertEqual(1, self.calc('5 mod 2'))
 
+    def test_proc(self):
+        self.assertEqual(105, self.calc('100 +% 5'))
+        self.assertEqual(75, self.calc('100 -% 25'))
+        self.assertEqual(35, self.calc('100 *% 35'))
+
+
 
     def test_bracket(self):
         self.assertEqual(8, self.calc('2 * (2 + 2)'))

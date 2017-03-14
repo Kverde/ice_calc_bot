@@ -6,7 +6,7 @@ class Lexer():
     TERM_OPERATOR = {'+', '-'}
     FACTOR_OPERATOR = {'*', '/'}
     BRACKED = {'(', ')'}
-    OTHER_OPERATOR = {'^', '!'}
+    OTHER_OPERATOR = {'^', '!', '%'}
     DECIMAL_SEPARATOR = {'.', ','}
     HEX_FLAG = {'x', 'X'}
     OCT_FLAG = {'o', 'O'}
@@ -35,6 +35,11 @@ class Lexer():
                 if res in ('*', '/') and self.parser.current() == res:
                     res += res
                     self.parser.next()
+
+                if res in ('-', '+', '*') and self.parser.current() == '%':
+                    res += '%'
+                    self.parser.next()
+
 
             elif ch in Lexer.NUMBERS:
                 res = self.parse_number()

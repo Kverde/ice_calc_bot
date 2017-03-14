@@ -4,14 +4,15 @@ mathExpr = term {operator1 term}
 
 term = factor {operator2 factor}
 
-factor = [unaryOp] factor [unaryOp2] | base {'^' factor}
+factor = [unaryOp] factor [unaryOp2] | base {powerOp factor}
 
 base = number | '(' mathExpr ')' | const | function
 
-operator1 = '+' | '-'
-operator2 = '*' | '/'
+operator1 = '+' | '-' | '+%' | '-%'
+operator2 = '*' | '/' | '//' | 'div' | 'mod' | '*%'
 unaryOp = '+' | '-'
 unaryOp2 = '!'
+powerOp = '^' | '**'
 
 function = ident '(' mathExpr ')'
 const = ident

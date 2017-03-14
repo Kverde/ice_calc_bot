@@ -9,12 +9,24 @@ class SyntaxEror(Exception):
     pass
 
 
+def mul_proc(a, b):
+    return a * (b / 100)
+
+def add_proc(a, b):
+    return a + a * (b / 100)
+
+def sub_proc(a, b):
+    return a - a * (b / 100)
+
+
 class MathParser():
     ERROR_PREFIX = 'Error: '
 
     OPERATOR1 = {
         '+': operator.add,
-        '-': operator.sub
+        '-': operator.sub,
+        '+%': add_proc,
+        '-%': sub_proc
     }
 
     OPERATOR2 = {
@@ -22,7 +34,8 @@ class MathParser():
         '/': operator.truediv,
         '//': operator.floordiv,
         'div': operator.floordiv,
-        'mod': operator.mod
+        'mod': operator.mod,
+        '*%': mul_proc
     }
 
     UNARY_OPERATOR = {
