@@ -8,6 +8,24 @@ from source.ks_lexer import Lexer
 class SyntaxEror(Exception):
     pass
 
+def sin(x):
+    return math.sin(math.radians(x))
+
+def cos(x):
+    return math.cos(math.radians(x))
+
+def tan(x):
+    return math.tan(math.radians(x))
+
+def asin(x):
+    return math.asin(math.radians(x))
+
+def acos(x):
+    return math.acos(math.radians(x))
+
+def atan(x):
+    return math.atan(math.radians(x))
+
 
 class MathParser():
     ERROR_PREFIX = 'Error: '
@@ -33,11 +51,25 @@ class MathParser():
     }
 
     MATH_FUNCTION = {
-        'sin': math.sin,
-        'cos': math.cos,
+        'sin': sin,
+        'cos': cos,
+        'tan': tan,
+        'asin': asin,
+        'acos': acos,
+        'atan': atan,
+
+        'sinr': math.sin,
+        'cosr': math.cos,
+        'tanr': math.tan,
+        'asinr': math.sin,
+        'acosr': math.cos,
+        'atanr': math.tan,
+
+
         'sqrt': math.sqrt,
-        'tan': math.tan,
-        'abs': math.fabs
+
+        'abs': math.fabs,
+        'radians': math.radians
     }
 
     def __init__(self, text):
