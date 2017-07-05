@@ -6,7 +6,7 @@ from source.ks_math import MathParser
 class TestParser(unittest.TestCase):
 
     def calc(self, text, base = 10):
-        return  MathParser(text).parse(base)
+        return  MathParser(text).solve(base)
 
     def test_empty(self):
         self.assertEqual(0, self.calc(''))
@@ -15,7 +15,19 @@ class TestParser(unittest.TestCase):
         self.assertEqual(6, self.calc('2 + 2 * 2'))
         self.assertEqual(23, self.calc('23'))
         self.assertEqual(20.35, self.calc('12.12 + 0.23 + 3. + 5'))
-        self.assertEqual(2.0, self.calc('4 / 2'))
+
+        self.assertEqual('2', str(self.calc('4 / 2')))
+
+        self.assertEqual(2, self.calc('5 // 2'))
+        self.assertEqual(2, self.calc('5 div 2'))
+        self.assertEqual(1, self.calc('5 mod 2'))
+
+    def test_proc(self):
+        self.assertEqual(105, self.calc('100 +% 5'))
+        self.assertEqual(75, self.calc('100 -% 25'))
+        self.assertEqual(35, self.calc('100 *% 35'))
+
+
 
     def test_bracket(self):
         self.assertEqual(8, self.calc('2 * (2 + 2)'))
@@ -26,6 +38,9 @@ class TestParser(unittest.TestCase):
         self.assertEqual(1024, self.calc('2 ^ 10'))
         self.assertEqual(5 ** 5, self.calc('5 ^ + (2 + 3)'))
         self.assertEqual(0.25, self.calc('2 ^ - 2'))
+
+        self.assertEqual(0.25, self.calc('2 ** - 2'))
+        self.assertEqual(5 ** 5, self.calc('5 ** + (2 + 3)'))
 
     def test_factorial(self):
         self.assertEqual(1 * 2 * 3 * 4 * 5, self.calc('5!'))

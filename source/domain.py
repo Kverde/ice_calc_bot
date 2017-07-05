@@ -1,14 +1,26 @@
 from source.ks_math import MathParser
 
 help_text = ''' Поддерживаемые операции +, -, *, /
-^ - возведение в степень (2 ^ 10)
+//, div - целочисленное деление
+mod - остаток от деления
+^, ** - возведение в степень (2 ^ 10 или 2 ** 10)
 ! - факториал (5!)
+
++%, -%, *% - операторы для вычисления процентов:
+a +% b = a + a * (b / 100)
+a -% b = a - a * (b / 100)
+a *% b = a * (b / 100)
+
+
 Скобки ( ) для управления порядком вычислений
+
 Константы "e" и "pi"  (pi * 2)
 Функции:
 sqrt - квадратный корень
 abs - модуль числа
 sin, cos, tan
+
+
 
 0b6F - числа в двоичной системе
 0o343 - числа в восьмеричной системе
@@ -42,7 +54,7 @@ class Domain():
 
     def on_math(self, bot, update, command, base):
         text = update.message.text[len(command):].strip()
-        res = MathParser(text).parse(base)
+        res = MathParser(text).solve(base)
         update.message.reply_text(res)
 
     def on_text(self, bot, update, base):
@@ -51,6 +63,6 @@ class Domain():
             self.on_help(bot, update)
             return 'text_help'
 
-        res = MathParser(text).parse(base)
+        res = MathParser(text).solve(base)
         update.message.reply_text(res)
         return 'math'

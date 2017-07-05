@@ -27,17 +27,33 @@ def atan(x):
     return math.atan(math.radians(x))
 
 
+def mul_proc(a, b):
+    return a * (b / 100)
+
+def add_proc(a, b):
+    return a + a * (b / 100)
+
+def sub_proc(a, b):
+    return a - a * (b / 100)
+
+
 class MathParser():
     ERROR_PREFIX = 'Error: '
 
     OPERATOR1 = {
         '+': operator.add,
-        '-': operator.sub
+        '-': operator.sub,
+        '+%': add_proc,
+        '-%': sub_proc
     }
 
     OPERATOR2 = {
         '*': operator.mul,
-        '/': operator.truediv
+        '/': operator.truediv,
+        '//': operator.floordiv,
+        'div': operator.floordiv,
+        'mod': operator.mod,
+        '*%': mul_proc
     }
 
     UNARY_OPERATOR = {
@@ -112,7 +128,7 @@ class MathParser():
             self.lexer.next()
             res = math.factorial(res)
 
-        while self.lexer.cur == '^':
+        while self.lexer.cur in ('^', '**'):
             self.lexer.next()
             res = res ** self.factor()
 
@@ -183,6 +199,16 @@ class MathParser():
 
             except Exception as e:
                 return str(MathParser.ERROR_PREFIX + str(e))
+
+    def solve(self, base):
+        res = self.parse(base)
+
+        if type(res) == float:
+            frac = math.modf(res)
+            if frac[0] == 0:
+                res = int(res)
+
+        return res
 
 if __name__ == '__main__':
     p = MathParser('2 + 2 * + 2 dfd')
