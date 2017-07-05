@@ -18,13 +18,13 @@ def tan(x):
     return math.tan(math.radians(x))
 
 def asin(x):
-    return math.asin(math.radians(x))
+    return math.degrees(math.asin(x))
 
 def acos(x):
-    return math.acos(math.radians(x))
+    return math.degrees(math.acos(x))
 
 def atan(x):
-    return math.atan(math.radians(x))
+    return math.degrees(math.atan(x))
 
 
 def mul_proc(a, b):
@@ -77,15 +77,16 @@ class MathParser():
         'sinr': math.sin,
         'cosr': math.cos,
         'tanr': math.tan,
-        'asinr': math.sin,
-        'acosr': math.cos,
-        'atanr': math.tan,
+        'asinr': math.asin,
+        'acosr': math.acos,
+        'atanr': math.atan,
 
 
         'sqrt': math.sqrt,
 
         'abs': math.fabs,
-        'radians': math.radians
+        'radians': math.radians,
+        'degrees': math.degrees
     }
 
     def __init__(self, text):
