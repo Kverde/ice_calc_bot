@@ -1,6 +1,6 @@
 import psycopg2
 
-sql_log = 'insert into calc_bot.log(user_id, msg, type_msg) values({}, ''{}'', 0)'
+sql_log = "insert into calc_bot.log(user_id, msg, type_msg) values({}, '{}', 0)"
 
 
 class Db():
