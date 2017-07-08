@@ -3,11 +3,13 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 from lib import botan
 from lib.setting import Setting
 from source.domain import Domain
+from source.db import Db
 
 APP_ID = 'IceCalcBot'
 
 setting = Setting(APP_ID)
 domain = Domain()
+db = Db(setting)
 
 def botanTrack(message, event_name):
     if setting.botan_token == '':
@@ -16,6 +18,7 @@ def botanTrack(message, event_name):
     uid = message.from_user
     message_dict = message.to_dict()
     botan.track(setting.botan_token, uid, message_dict, event_name)
+    db.insert_log(uid, message.text)
 
 
 def cm_start(bot, update):
