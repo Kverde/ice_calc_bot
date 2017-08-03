@@ -17,7 +17,7 @@ def botanTrack(message, event_name):
 
     uid = message.from_user
     message_dict = message.to_dict()
-    botan.track(setting.botan_token, uid, message_dict, event_name)
+   # botan.track(setting.botan_token, uid, message_dict, event_name)
 
 def insert_log(update):
     db.insert_log(update.message.from_user.id, update.message.text)
