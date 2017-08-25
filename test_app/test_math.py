@@ -22,6 +22,15 @@ class TestParser(unittest.TestCase):
         self.assertEqual(2, self.calc('5 div 2'))
         self.assertEqual(1, self.calc('5 mod 2'))
 
+
+        self.assertEqual(10, self.calc('5 * 2'))
+        self.assertEqual(6, self.calc('2 × 3'))
+
+        self.assertEqual(5, self.calc('10 / 2'))
+        self.assertEqual(5, self.calc('10 ÷ 2'))
+
+
+
     def test_proc(self):
         self.assertEqual(105, self.calc('100 +% 5'))
         self.assertEqual(75, self.calc('100 -% 25'))

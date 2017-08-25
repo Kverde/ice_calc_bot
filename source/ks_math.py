@@ -52,7 +52,9 @@ class MathParser():
 
     OPERATOR2 = {
         '*': operator.mul,
+        '×': operator.mul,
         '/': operator.truediv,
+        '÷': operator.truediv,
         '//': operator.floordiv,
         'div': operator.floordiv,
         'mod': operator.mod,
