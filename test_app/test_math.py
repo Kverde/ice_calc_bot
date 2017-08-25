@@ -56,13 +56,40 @@ class TestParser(unittest.TestCase):
         self.assertEqual('Error: неизвестный иднтификатор "z"', self.calc('22 z'))
 
     def test_func(self):
-        self.assertEqual(math.sin(90), self.calc('sin(90)'))
-        self.assertEqual(math.cos(90), self.calc('cos(90)'))
+        self.assertEqual(math.sin(90), self.calc('sinr(90)'))
+        self.assertEqual(math.cos(90), self.calc('cosr(90)'))
         self.assertEqual(math.sqrt(64) + 33 + math.pi, self.calc('sqrt(64) + 33 + pi'))
-        self.assertEqual(math.tan(90), self.calc('tan(90)'))
+        self.assertEqual(math.tan(90), self.calc('tanr(90)'))
         self.assertEqual(math.fabs(90), self.calc('abs(90)'))
+
+        self.assertEqual(math.sin(math.radians(90)), self.calc('sin(90)'))
+        self.assertEqual(math.cos(math.radians(90)), self.calc('cos(90)'))
+        self.assertEqual(math.sqrt(64) + 33 + math.pi, self.calc('sqrt(64) + 33 + pi'))
+        self.assertEqual(math.tan(math.radians(90)), self.calc('tan(90)'))
+        self.assertEqual(math.fabs(90), self.calc('abs(90)'))
+
 
     def test_base(self):
         self.assertEqual('0b11', self.calc('3', 2))
         self.assertEqual('0o3', self.calc('3', 8))
         self.assertEqual('0xA', self.calc('10', 16))
+
+    def test_log(self):
+        self.assertEqual(2, self.calc('log(100)'))
+        self.assertEqual(3, self.calc('log(1000)'))
+        self.assertEqual(1, self.calc('log(10)'))
+        self.assertEqual(0, self.calc('log(1)'))
+
+        self.assertEqual(2, self.calc('log10(100)'))
+        self.assertEqual(3, self.calc('log10(1000)'))
+        self.assertEqual(1, self.calc('log10(10)'))
+        self.assertEqual(0, self.calc('log10(1)'))
+
+        self.assertEqual(1, self.calc('log2(2)'))
+        self.assertEqual(5, self.calc('log2(32)'))
+        self.assertEqual(0, self.calc('log2(1)'))
+
+        self.assertEqual(math.log(35), self.calc('ln(35)'))
+        self.assertEqual(math.log(120), self.calc('ln(120)'))
+
+

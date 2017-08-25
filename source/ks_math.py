@@ -36,6 +36,9 @@ def add_proc(a, b):
 def sub_proc(a, b):
     return a - a * (b / 100)
 
+def ln(x):
+    return math.log(x)
+
 
 class MathParser():
     ERROR_PREFIX = 'Error: '
@@ -86,7 +89,12 @@ class MathParser():
 
         'abs': math.fabs,
         'radians': math.radians,
-        'degrees': math.degrees
+        'degrees': math.degrees,
+        'log': math.log10,
+        'log2': math.log2,
+        'log10': math.log10,
+        'ln': ln
+
     }
 
     def __init__(self, text):
