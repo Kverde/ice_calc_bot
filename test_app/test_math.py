@@ -28,6 +28,7 @@ class TestParser(unittest.TestCase):
 
         self.assertEqual(5, self.calc('10 / 2'))
         self.assertEqual(5, self.calc('10 ÷ 2'))
+        self.assertEqual(5, self.calc('10 : 2'))
 
 
 
