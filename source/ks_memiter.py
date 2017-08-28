@@ -7,8 +7,7 @@ class MemIter():
     def next(self):
         try:
             self.cur = next(self.iter)
-        except Exception as e:
-            print(e)
+        except StopIteration as e:
             self.cur = None
 
     def current(self):

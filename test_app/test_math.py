@@ -65,6 +65,9 @@ class TestParser(unittest.TestCase):
         self.assertEqual('Error: неизвестный иднтификатор "ss"', self.calc('ss 22 z'))
         self.assertEqual('Error: неизвестный иднтификатор "z"', self.calc('22 z'))
 
+        self.assertEqual('Error: Неизвесный символ ord(#) = 35', self.calc('55.55 #'))
+
+
     def test_func(self):
         self.assertEqual(math.sin(90), self.calc('sinr(90)'))
         self.assertEqual(math.cos(90), self.calc('cosr(90)'))
