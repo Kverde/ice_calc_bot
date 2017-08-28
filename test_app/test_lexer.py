@@ -1,10 +1,13 @@
 import unittest
 
-from source.ks_lexer import Lexer
+from source.ks_lexer import Lexer, LexerError
 
 class TestLexer(unittest.TestCase):
     def getList(self, text):
         return list(Lexer(text))
+
+    def testError(self):
+        self.assertRaises(LexerError, self.getList, '55.55 #')
 
     def test_number(self):
         self.assertEqual([13], self.getList('13'))
