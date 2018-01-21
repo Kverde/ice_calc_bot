@@ -1,10 +1,13 @@
 
 from source.ks_parser import Parser
 
+class LexerError(Exception):
+    pass
+
 class Lexer():
     NUMBERS = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9'}
     TERM_OPERATOR = {'+', '-'}
-    FACTOR_OPERATOR = {'*', '/'}
+    FACTOR_OPERATOR = {'*', '/', '×', '÷', ':'}
     BRACKED = {'(', ')'}
     OTHER_OPERATOR = {'^', '!', '%'}
     DECIMAL_SEPARATOR = {'.', ','}
@@ -46,7 +49,7 @@ class Lexer():
             elif ch.isalpha():
                 res = self.parse_ident()
             else:
-                return 'Неизвесный символ ord(' + ch + ') = ' + str(ord(ch))
+                raise LexerError('Неизвесный символ ord(' + ch + ') = ' + str(ord(ch)))
 
             if type(res) == str:
                 res = res.lower()
