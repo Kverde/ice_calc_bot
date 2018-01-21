@@ -20,6 +20,7 @@ def track(token, uid, message, name='Message'):
             params={"token": token, "uid": uid, "name": name},
             data=json.dumps(message),
             headers={'Content-type': 'application/json'},
+            timeout=1
         )
         return r.json()
     except requests.exceptions.Timeout:
